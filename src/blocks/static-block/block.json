@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "custom-block/static-block",
+	"version": "0.1.0",
+	"title": "Static Block",
+	"category": "my-custom-category",
+	"icon": "smiley",
+	"description": "Example block scaffolded with Create Block tool.",
+	"example": {},
+	"supports": {
+		"html": false,
+		"align": true,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"textdomain": "static-block",
+	"editorScript": "file:./index.js",
+	"style": "file:../tailwind.css"
+}

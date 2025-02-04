@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* Remove the Title Block */
+.editor-visual-editor__post-title-wrapper {
+    display: none !important;
+}
+
+/* .wp-block-group {
+    gap: 0 !important;
+} */
