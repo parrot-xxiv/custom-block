@@ -67,3 +67,26 @@ function my_theme_setup() {
 
 add_action( 'after_setup_theme', 'my_theme_setup' );
 
+
+function my_plugin_enqueue_scripts() {
+    wp_enqueue_script(
+        'rellax',
+        plugins_url( 'src/blocks/parallax-banner/rellax.min.js', __FILE__ ),
+        array(),
+        '1.0.0',
+        true
+    );
+    
+    wp_enqueue_script(
+        'myparallaxscript',
+        plugins_url( 'src/blocks/parallax-banner/parallax.js', __FILE__ ),
+        array( 'rellax' ),
+        '1.0.0',
+        true
+    );
+}
+add_action( 'wp_enqueue_scripts', 'my_plugin_enqueue_scripts' );
+add_action( 'enqueue_block_editor_assets', 'my_plugin_enqueue_scripts' );
+
+
+
