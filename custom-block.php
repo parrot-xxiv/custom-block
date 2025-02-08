@@ -70,17 +70,9 @@ add_action( 'after_setup_theme', 'my_theme_setup' );
 
 function my_plugin_enqueue_scripts() {
     wp_enqueue_script(
-        'rellax',
-        plugins_url( 'src/blocks/parallax-banner/rellax.min.js', __FILE__ ),
-        array(),
-        '1.0.0',
-        true
-    );
-    
-    wp_enqueue_script(
-        'myparallaxscript',
+        'parallaxscript',
         plugins_url( 'src/blocks/parallax-banner/parallax.js', __FILE__ ),
-        array( 'rellax' ),
+        array(),
         '1.0.0',
         true
     );
