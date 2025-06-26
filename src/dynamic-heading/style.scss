@@ -1,0 +1,96 @@
+/**
+ * style.scss
+ * This file is for styles that apply to both the editor and the front-end.
+ */
+
+.wp-block-custom-blocks-dynamic-heading {
+    // This is the main block container
+    .dynamic-heading-item {
+        margin: 0;
+        padding: 0.5em 0;
+        display: flex; // Use flex to keep static and dynamic text on the same line
+        flex-wrap: wrap; // Allow wrapping on small screens
+        opacity: 0; // Start hidden, GSAP will reveal it
+        
+        .static-text-wrapper, .dynamic-text-wrapper {
+            display: inline-block;
+            vertical-align: bottom; // Align text parts nicely
+        }
+
+        // Wrapper for the dynamic text to handle overflow for animations
+        .dynamic-text-wrapper {
+            position: relative;
+            overflow: hidden; 
+            min-height: 1.2em; // Ensure it has height for the animation to work
+        }
+
+        .static-text-inner, .dynamic-text-inner {
+            display: inline-block;
+        }
+    }
+
+    // Alignment styles
+    &.has-text-align-center {
+        justify-content: center;
+        text-align: center;
+    }
+    &.has-text-align-right {
+        justify-content: flex-end;
+        text-align: right;
+    }
+    &.has-text-align-left {
+        justify-content: flex-start;
+        text-align: left;
+    }
+}
+
+
+/**
+ * editor.scss
+ * This file is for editor-only styles.
+ */
+
+.wp-block-custom-blocks-dynamic-heading {
+    // In the editor, make sure headings are visible
+    .dynamic-heading-item {
+        opacity: 1;
+    }
+}
+
+.dynamic-heading-repeater-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+
+    .repeater-remove-button {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center; // Center the icon and text
+    }
+}
+
+.dynamic-heading-placeholder {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+
+    p {
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+}
+
+// Editor preview styles
+.dynamic-heading-editor-preview {
+    margin: 0;
+    padding: 0.5em 0;
+
+    .dynamic-text-wrapper {
+        display: inline-block;
+    }
+}
+
+
+

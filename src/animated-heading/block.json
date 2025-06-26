@@ -1,0 +1,78 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "custom-blocks/animated-heading",
+	"version": "0.1.0",
+	"title": "Animated Heading",
+	"category": "custom-category",
+	"icon": "smiley",
+	"description": "Animated Heading",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"textColor": {
+			"default": "#FF0000",
+			"type": "string"
+		},
+		"content": {
+			"type": "string",
+			"source": "html",
+			"selector": "h1,h2,h3,h4,h5,h6",
+			"default": "Animated Heading"
+		},
+		"level": {
+			"type": "number",
+			"default": 2
+		},
+		"animationType": {
+			"type": "string",
+			"default": "fadeInUp"
+		},
+		"duration": {
+			"type": "number",
+			"default": 1
+		},
+		"delay": {
+			"type": "number",
+			"default": 0
+		},
+		"triggerOnScroll": {
+			"type": "boolean",
+			"default": true
+		},
+		"fontSize": {
+			"type": "string"
+		},
+		"fontFamily": {
+			"type": "string"
+		},
+		"fontWeight": {
+			"type": "string"
+		},
+		"textTransform": {
+			"type": "string"
+		},
+		"letterSpacing": {
+			"type": "string"
+		},
+		"lineHeight": {
+			"type": "string"
+		},
+		"textAlign": {
+			"type": "string"
+		},
+		"backgroundColor": {
+			"type": "string"
+		},
+		"gradient": {
+			"type": "string"
+		}
+	},
+	"textdomain": "custom-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

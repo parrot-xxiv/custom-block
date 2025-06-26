@@ -1,0 +1,16 @@
+.wp-block-animated-heading {
+	margin: 0 0 1em 0;
+	
+	h1, h2, h3, h4, h5, h6 {
+		margin: 0;
+		line-height: 1.2;
+		color: inherit;
+	}
+	
+	// Prevent flash of unstyled content
+	&:not(.is-selected) {
+		h1, h2, h3, h4, h5, h6 {
+			will-change: transform, opacity;
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "custom-blocks/dynamic-heading",
+	"version": "0.1.0",
+	"title": "Dynamic Heading",
+	"category": "custom-category",
+	"icon": "smiley",
+	"description": "Dynamic Heading",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "custom-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

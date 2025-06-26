@@ -1,0 +1,1 @@
+npx @wordpress/create-block@latest --no-plugin

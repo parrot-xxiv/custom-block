@@ -16,5 +16,9 @@
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^30.18.0"
+	},
+	"dependencies": {
+		"@wordpress/icons": "^10.26.0",
+		"gsap": "^3.13.0"
 	}
 }

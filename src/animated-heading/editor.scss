@@ -1,0 +1,65 @@
+.wp-block-animated-heading {
+	.block-editor-rich-text__editable {
+		&:focus {
+			outline: none;
+		}
+	}
+	
+	// Preview animation styles in editor
+	&.animation-fadeInUp h1, 
+	&.animation-fadeInUp h2, 
+	&.animation-fadeInUp h3, 
+	&.animation-fadeInUp h4, 
+	&.animation-fadeInUp h5, 
+	&.animation-fadeInUp h6 {
+		position: relative;
+		
+		&::after {
+			content: '↗';
+			position: absolute;
+			right: -20px;
+			top: 0;
+			font-size: 0.8em;
+			opacity: 0.5;
+			color: #0073aa;
+		}
+	}
+	
+	&.animation-scaleIn h1, 
+	&.animation-scaleIn h2, 
+	&.animation-scaleIn h3, 
+	&.animation-scaleIn h4, 
+	&.animation-scaleIn h5, 
+	&.animation-scaleIn h6 {
+		position: relative;
+		
+		&::after {
+			content: '⚲';
+			position: absolute;
+			right: -20px;
+			top: 0;
+			font-size: 0.8em;
+			opacity: 0.5;
+			color: #0073aa;
+		}
+	}
+	
+	&.animation-bounceIn h1, 
+	&.animation-bounceIn h2, 
+	&.animation-bounceIn h3, 
+	&.animation-bounceIn h4, 
+	&.animation-bounceIn h5, 
+	&.animation-bounceIn h6 {
+		position: relative;
+		
+		&::after {
+			content: '⚡';
+			position: absolute;
+			right: -20px;
+			top: 0;
+			font-size: 0.8em;
+			opacity: 0.5;
+			color: #0073aa;
+		}
+	}
+}
