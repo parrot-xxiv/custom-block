@@ -116,13 +116,52 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false
+			'html' => false,
+			'styles' => true
 		),
 		'textdomain' => 'custom-blocks',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
-		'viewScript' => 'file:./view.js'
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'textColor' => array(
+				'default' => '#FF0000',
+				'type' => 'string'
+			),
+			'content' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => 'h1,h2,h3,h4,h5,h6',
+				'default' => 'Animated Heading'
+			),
+			'level' => array(
+				'type' => 'number',
+				'default' => 2
+			),
+			'animationType' => array(
+				'type' => 'string',
+				'default' => 'fadeInUp'
+			),
+			'duration' => array(
+				'type' => 'number',
+				'default' => 1
+			),
+			'delay' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'triggerOnScroll' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'fontSize' => array(
+				'type' => 'string'
+			),
+			'fontFamily' => array(
+				'type' => 'string'
+			)
+		)
 	),
 	'navigation' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',

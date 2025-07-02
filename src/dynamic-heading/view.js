@@ -2,38 +2,50 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextPlugin } from 'gsap/TextPlugin';
 
-gsap.registerPlugin(ScrollTrigger,TextPlugin);
+gsap.registerPlugin(ScrollTrigger, TextPlugin); 
 
 document.addEventListener('DOMContentLoaded', () => {
+    // The selector is now for the block wrapper, not individual items
     const headingBlocks = document.querySelectorAll('.wp-block-custom-blocks-dynamic-heading');
 
     headingBlocks.forEach(block => {
-        const headings = block.querySelectorAll('.dynamic-heading-item');
+        // Find the single heading item within the block
+        const heading = block.querySelector('.dynamic-heading-item');
+        if (!heading) return;
 
-        headings.forEach(heading => {
-            const staticText = heading.querySelector('.static-text-inner');
-            const dynamicWrapper = heading.querySelector('.dynamic-text-wrapper');
-            const dynamicText = heading.querySelector('.dynamic-text-inner');
-            const animationType = heading.dataset.animationType;
-            const dynamicWords = JSON.parse(heading.dataset.dynamicText || '[]');
+        const animationType = heading.dataset.animationType;
+        const dynamicWords = JSON.parse(heading.dataset.dynamicText || '[]');
+        
+        // Elements for dynamic headings
+        const staticText = heading.querySelector('.static-text-inner');
+        const dynamicText = heading.querySelector('.dynamic-text-inner');
+        
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: heading,
+                start: 'top 85%',
+                toggleActions: 'play none none none',
+                markers: false, 
+            },
+        });
 
-            if (!staticText || !dynamicText || dynamicWords.length === 0) return;
+        // --- Entrance Animation ---
+        let entranceVars = { duration: 1, ease: 'power3.out' };
+        let targets = heading; // Default target is the whole heading
 
-            // Set initial hidden states for animations
-            gsap.set(dynamicWrapper, { overflow: 'hidden' });
-            gsap.set(heading, { opacity: 1 }); // Ensure parent is visible
-
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: heading,
-                    start: 'top 85%', // When the top of the trigger hits 85% down from the top of the viewport
-                    toggleActions: 'play none none none', // Play the animation once
-                    markers: false, // Set to true for debugging
-                },
-            });
-
-            // --- Entrance Animation ---
-            let entranceVars = { duration: 1, ease: 'power3.out' };
+        // Special handling for slide-up/down to animate inner parts
+        if (animationType === 'slide-in-up' && staticText && dynamicText) {
+             gsap.set(heading.querySelectorAll('.static-text-wrapper, .dynamic-text-wrapper'), { overflow: 'hidden' });
+             targets = [staticText, dynamicText];
+             entranceVars.yPercent = 100;
+             entranceVars.stagger = 0.1;
+        } else if (animationType === 'slide-in-down' && staticText && dynamicText) {
+            gsap.set(heading.querySelectorAll('.static-text-wrapper, .dynamic-text-wrapper'), { overflow: 'hidden' });
+            targets = [staticText, dynamicText];
+            entranceVars.yPercent = -100;
+            entranceVars.stagger = 0.1;
+        } else {
+             // Standard animations target the whole heading element
             switch (animationType) {
                 case 'fade-in':
                     entranceVars.opacity = 0;
@@ -54,16 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     entranceVars.opacity = 0;
                     entranceVars.x = 100;
                     break;
-                 case 'slide-in-up':
-                    gsap.set(heading.querySelector('.static-text-wrapper'), { overflow: 'hidden' });
-                    gsap.set(heading.querySelector('.dynamic-text-wrapper'), { overflow: 'hidden' });
-                    tl.from([staticText, dynamicText], { yPercent: 100, stagger: 0.1, duration: 0.8, ease: 'power3.out' });
-                    break;
-                 case 'slide-in-down':
-                    gsap.set(heading.querySelector('.static-text-wrapper'), { overflow: 'hidden' });
-                    gsap.set(heading.querySelector('.dynamic-text-wrapper'), { overflow: 'hidden' });
-                    tl.from([staticText, dynamicText], { yPercent: -100, stagger: 0.1, duration: 0.8, ease: 'power3.out' });
-                    break;
                 case 'scale-up':
                     entranceVars.opacity = 0;
                     entranceVars.scale = 0.5;
@@ -77,34 +79,37 @@ document.addEventListener('DOMContentLoaded', () => {
                     entranceVars.scale = 0.3;
                     entranceVars.ease = 'elastic.out(1, 0.5)';
                     break;
+                case 'none':
+                    // Do nothing for none
+                    break;
                 default:
-                     entranceVars.opacity = 0; // Default to fade-in
+                     entranceVars.opacity = 0;
             }
+        }
+        
+        if (animationType !== 'none') {
+             tl.from(targets, entranceVars);
+        }
+
+        // --- Dynamic Text Cycling ---
+        // This will only run if there is a dynamicText element and more than one word.
+        if (dynamicText && dynamicWords.length > 1) {
+            let wordIndex = 0;
             
-            // Apply entrance animation if not a slide-up/down (they have custom timelines)
-            if (animationType !== 'slide-in-up' && animationType !== 'slide-in-down' && animationType !== 'none') {
-                tl.from(heading, entranceVars);
-            }
+            const cycleWords = () => {
+                wordIndex = (wordIndex + 1) % dynamicWords.length;
+                gsap.to(dynamicText, {
+                    duration: 0.8,
+                    text: dynamicWords[wordIndex],
+                    ease: 'none',
+                });
+            };
 
-            // --- Dynamic Text Cycling ---
-            if (dynamicWords.length > 1) {
-                let wordIndex = 0;
-                const cycleWords = () => {
-                    const nextIndex = (wordIndex + 1) % dynamicWords.length;
-
-                    gsap.timeline()
-                        .to(dynamicText, { yPercent: -100, duration: 0.5, ease: 'power2.in' })
-                        .set(dynamicText, { text: dynamicWords[nextIndex], yPercent: 100 })
-                        .to(dynamicText, { yPercent: 0, duration: 0.5, ease: 'power2.out' });
-                    
-                    wordIndex = nextIndex;
-                };
-
-                // Add the loop to the main timeline
-                tl.add(gsap.delayedCall(2, () => { // Initial delay before cycling starts
-                    setInterval(cycleWords, 2000); // Cycle every 2 seconds
-                }));
-            }
-        });
+            // Add the loop to the main timeline after the entrance animation completes
+            tl.add(gsap.delayedCall(2, () => {
+                setInterval(cycleWords, 2500);
+            }));
+        }
     });
 });
+
