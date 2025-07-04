@@ -111,57 +111,62 @@ return array(
 		'title' => 'Dynamic Heading',
 		'category' => 'custom-category',
 		'icon' => 'smiley',
-		'description' => 'Dynamic Heading',
-		'example' => array(
-			
-		),
+		'description' => 'A heading block with dynamic text and animation options.',
 		'supports' => array(
 			'html' => false,
-			'styles' => true
-		),
-		'textdomain' => 'custom-blocks',
-		'editorScript' => 'file:./index.js',
-		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css',
-		'viewScript' => 'file:./view.js',
-		'attributes' => array(
-			'textColor' => array(
-				'default' => '#FF0000',
-				'type' => 'string'
+			'align' => array(
+				'left',
+				'center',
+				'right'
 			),
-			'content' => array(
+			'typography' => array(
+				'fontSize' => true,
+				'lineHeight' => true,
+				'fontFamily' => true,
+				'fontWeight' => true,
+				'textDecoration' => true,
+				'textTransform' => true,
+				'letterSpacing' => true
+			),
+			'color' => array(
+				'text' => true,
+				'gradients' => true
+			)
+		),
+		'attributes' => array(
+			'headingType' => array(
 				'type' => 'string',
-				'source' => 'html',
-				'selector' => 'h1,h2,h3,h4,h5,h6',
+				'default' => 'static'
+			),
+			'staticTextPrefix' => array(
+				'type' => 'string',
+				'default' => 'I am a'
+			),
+			'dynamicText' => array(
+				'type' => 'string',
+				'default' => 'Developer, Designer, Creator'
+			),
+			'staticHeadingText' => array(
+				'type' => 'string',
 				'default' => 'Animated Heading'
 			),
-			'level' => array(
-				'type' => 'number',
-				'default' => 2
-			),
-			'animationType' => array(
+			'tag' => array(
 				'type' => 'string',
-				'default' => 'fadeInUp'
+				'default' => 'h2'
 			),
-			'duration' => array(
-				'type' => 'number',
-				'default' => 1
-			),
-			'delay' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'triggerOnScroll' => array(
-				'type' => 'boolean',
-				'default' => true
-			),
-			'fontSize' => array(
-				'type' => 'string'
-			),
-			'fontFamily' => array(
-				'type' => 'string'
+			'animation' => array(
+				'type' => 'object',
+				'default' => array(
+					'type' => 'fade-in-up',
+					'duration' => 1,
+					'delay' => 0
+				)
 			)
-		)
+		),
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./editor.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js'
 	),
 	'navigation' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',

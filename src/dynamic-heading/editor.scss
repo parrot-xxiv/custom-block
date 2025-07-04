@@ -1,64 +1,21 @@
-/* Editor-specific styles */
+/**
+ * editor.scss
+ * Editor-only styles.
+ */
+
 .wp-block-custom-blocks-dynamic-heading {
-    margin: 20px 0;
-}
+	// In the editor, make sure headings are visible
+	.dynamic-heading-item {
+		opacity: 1;
+	}
 
-.wp-block-custom-blocks-dynamic-heading .dynamic-heading-container {
-    min-height: auto;
-    overflow: visible;
-}
+	.dynamic-heading-editor-preview {
+		margin: 0;
+		padding: 0.5em 0;
 
-.wp-block-custom-blocks-dynamic-heading .dynamic-heading {
-    position: relative !important;
-    opacity: 1 !important;
-    transform: none !important;
-    margin-bottom: 15px;
-    padding: 15px;
-    border: 2px dashed #0073aa;
-    background: rgba(0, 115, 170, 0.05);
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-.wp-block-custom-blocks-dynamic-heading .dynamic-heading:hover {
-    background: rgba(0, 115, 170, 0.1);
-    border-color: #005a87;
-}
-
-.wp-block-custom-blocks-dynamic-heading .dynamic-heading:before {
-    content: "Animation: " attr(data-animation) " | Duration: " attr(data-duration) "s | Delay: " attr(data-delay) "s";
-    display: block;
-    font-size: 11px;
-    color: #0073aa;
-    font-weight: 500;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.wp-block-custom-blocks-dynamic-heading .dynamic-heading:last-child {
-    margin-bottom: 0;
-}
-
-/* Inspector Controls Styling */
-.components-panel__body .components-base-control {
-    margin-bottom: 16px;
-}
-
-.components-panel__body h4 {
-    color: #1e1e1e;
-    font-weight: 600;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.components-panel__body .components-button.is-destructive {
-    margin-top: 8px;
-    font-size: 12px;
-}
-
-.components-panel__body > div[style*="border"] {
-    background: #f9f9f9;
+		.dynamic-text-wrapper {
+			display: inline-block;
+		}
+	}
 }
 

@@ -1,5 +1,7 @@
 import { useBlockProps } from '@wordpress/block-editor';
 
+
+
 export default function save({ attributes }) {
     const {
         headingType = 'static',
@@ -32,7 +34,7 @@ export default function save({ attributes }) {
                 </TagName>
             ) : (
                 <TagName
-                    style={{"font-family": fontFamily}}
+                    style={{"font-family":fontFamily}}
                     className="dynamic-heading-item"
                     data-animation-type={animationType}
                     data-dynamic-text="[]" // Pass empty array for static headings
@@ -42,6 +44,10 @@ export default function save({ attributes }) {
             )}
         </div>
     );
+
 }
+
+
+
 
 

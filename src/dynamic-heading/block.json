@@ -1,3 +1,4 @@
+
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
@@ -6,53 +7,56 @@
 	"title": "Dynamic Heading",
 	"category": "custom-category",
 	"icon": "smiley",
-	"description": "Dynamic Heading",
-	"example": {},
+	"description": "A heading block with dynamic text and animation options.",
 	"supports": {
 		"html": false,
-		"styles": true
-	},
-	"textdomain": "custom-blocks",
-	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css",
-	"viewScript": "file:./view.js",
-	"attributes": {
-		"textColor": {
-			"default": "#FF0000",
-			"type": "string"
+		"align": ["left", "center", "right"],
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"fontFamily": true,
+			"fontWeight": true,
+			"textDecoration": true,
+			"textTransform": true,
+			"letterSpacing": true
 		},
-		"content": {
+		"color": {
+			"text": true,
+			"gradients": true
+		}
+	},
+	"attributes": {
+		"headingType": {
 			"type": "string",
-			"source": "html",
-			"selector": "h1,h2,h3,h4,h5,h6",
+			"default": "static"
+		},
+		"staticTextPrefix": {
+			"type": "string",
+			"default": "I am a"
+		},
+		"dynamicText": {
+			"type": "string",
+			"default": "Developer, Designer, Creator"
+		},
+		"staticHeadingText": {
+			"type": "string",
 			"default": "Animated Heading"
 		},
-		"level": {
-			"type": "number",
-			"default": 2
-		},
-		"animationType": {
+		"tag": {
 			"type": "string",
-			"default": "fadeInUp"
+			"default": "h2"
 		},
-		"duration": {
-			"type": "number",
-			"default": 1
-		},
-		"delay": {
-			"type": "number",
-			"default": 0
-		},
-		"triggerOnScroll": {
-			"type": "boolean",
-			"default": true
-		},
-		"fontSize": {
-			"type": "string"
-		},
-		"fontFamily": {
-			"type": "string"
+		"animation": {
+			"type": "object",
+			"default": {
+				"type": "fade-in-up",
+				"duration": 1,
+				"delay": 0
+			}
 		}
-	}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
 }
